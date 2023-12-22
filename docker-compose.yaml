@@ -20,9 +20,9 @@ services:
       - app-network
 
   app:
-    image: [dockerhub-repo]:{tag}
+    image: xuanviet96/devop-training:{tag}
     build:
-      context: nodejs/.
+      context: .
       dockerfile: Dockerfile
     container_name: app
     depends_on:
