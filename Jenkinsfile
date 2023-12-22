@@ -17,18 +17,18 @@ pipeline {
             TAG = sh(returnStdout: true, script: "git rev-parse -short=10 HEAD | tail -n +2").trim()
         }
          steps {
-            sh "docker build nodejs/. -t devops-training-nodejs-$ENV:latest --build-arg BUILD_ENV=$ENV -f nodejs/Dockerfile"
+            sh "docker build . -t devops-training-nodejs-$ENV:latest --build-arg BUILD_ENV=$ENV -f Dockerfile"
 
 
-            sh "cat docker.txt | docker login -u manhhoangseta --password-stdin"
+            sh "cat docker.txt | docker login -u xuanviet96 --password-stdin"
             // tag docker image
-            sh "docker tag devops-training-nodejs-$ENV:latest [dockerhub-repo]:$TAG"
+            sh "docker tag devops-training-nodejs-$ENV:latest xuanviet96/devop-training:$TAG"
 
             //push docker image to docker hub
-            sh "docker push [dockerhub-repo]:$TAG"
+            sh "docker push xuanviet96/devop-training:$TAG"
 
 	    // remove docker image to reduce space on build server	
-            sh "docker rmi -f [dockerhub-repo]:$TAG"
+            sh "docker rmi -f xuanviet96/devop-training:$TAG"
 
            }
          
