@@ -45,7 +45,7 @@ pipeline {
         }
 	steps {
             sh "sed -i 's/{tag}/$TAG/g' D:/deploy-$ENV/docker-compose.yaml"
-            sh "docker compose up -d"
+            sh "docker-compose up -d"
         }      
        }
    }
