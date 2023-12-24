@@ -37,14 +37,14 @@ pipeline {
 	    agent {
         node {
             label "Target-Server"
-                customWorkspace "/home/ubuntu/jenkins-$ENV/"
+                customWorkspace "/home/xuan/target-$ENV"
             }
         }
         environment {
             TAG = sh(returnStdout: true, script: "git rev-parse -short=10 HEAD | tail -n +2").trim()
         }
 	steps {
-            sh "sed -i 's/{tag}/$TAG/g' /home/ubuntu/jenkins-$ENV/docker-compose.yaml"
+            sh "sed -i 's/{tag}/$TAG/g' /home/xuan/target-$ENV/docker-compose.yaml"
             sh "docker-compose up -d"
         }      
        }
